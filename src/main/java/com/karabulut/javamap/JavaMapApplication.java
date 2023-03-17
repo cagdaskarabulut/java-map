@@ -36,7 +36,52 @@ public class JavaMapApplication {
         List<Integer> list = new ArrayList(map.values());
         Integer total2 = list.stream().reduce(0, Integer::sum);
         System.out.println("after 1.8 sum = " + total);
+        System.out.println();
 
+        synchronizedMapExample();
+        System.out.println();
+
+
+        whatWillBeTheOutput1();
+        System.out.println();
 
     }
+
+    public static void synchronizedMapExample() {
+
+        // HashMap with mapping containing country and their currency
+        Map<String, String> currencies = new HashMap<String, String>();
+
+        currencies.put("USA", "USD");
+        currencies.put("England", "GBP");
+        currencies.put("Canada", "CAD");
+        currencies.put("HongKong", "HKD");
+        currencies.put("Australia", "AUD");
+
+        // Synchronizing HashMap in Java
+        currencies = Collections.synchronizedMap(currencies);
+
+        // Make sure to synchronize Map while Iterating
+        // getting key set can be outside synchronized block
+        Set<String> keySet = currencies.keySet();
+
+        // Synchronizing on HashMap, not on Set
+        synchronized(currencies) {
+            Iterator<String> itr = keySet.iterator();
+            // Must be in synchronized block
+            while (itr.hasNext()){
+                System.out.println(itr.next());
+            }
+        }
+
+    }
+
+    public static void whatWillBeTheOutput1() {
+        ArrayList list = new ArrayList();
+        list.add(5);
+        list.add('5');
+        list.add("5");
+        System.out.println(list);
+    }
+
 }
