@@ -89,7 +89,7 @@ public class JavaMapApplication {
     }
 
     private static void findSecondLargestNumber(List<Integer> numbers){
-        List<Integer> result = numbers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-        System.out.println("findSecondLargestNumber_NewWay: " + result.get(1));
+        List<Integer> descList = numbers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        System.out.println("findSecondLargestNumber: " + descList.get(1));
     }
 }
