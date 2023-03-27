@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class JavaMapApplication {
@@ -11,6 +12,9 @@ public class JavaMapApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaMapApplication.class, args);
         exerciseMap();
+
+        //Find second largest number in given list
+        findSecondLargestNumber(List.of(4,12,8,3,9,1));
     }
 
     public static void exerciseMap(){
@@ -84,4 +88,8 @@ public class JavaMapApplication {
         System.out.println(list);
     }
 
+    private static void findSecondLargestNumber(List<Integer> numbers){
+        List<Integer> result = numbers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        System.out.println("findSecondLargestNumber_NewWay: " + result.get(1));
+    }
 }
