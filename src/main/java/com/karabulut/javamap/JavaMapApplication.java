@@ -15,6 +15,10 @@ public class JavaMapApplication {
 
         //Find second largest number in given list
         findSecondLargestNumber(List.of(4,12,8,3,9,1));
+
+        //Find missing number in sequential numbers list
+        List sequentialNumbersList = new ArrayList<Integer>(List.of(1,3,5,2,4,9,8,6));
+        findMissingNumberInSequentialNumbersList(sequentialNumbersList);
     }
 
     public static void exerciseMap(){
@@ -91,5 +95,27 @@ public class JavaMapApplication {
     private static void findSecondLargestNumber(List<Integer> numbers){
         List<Integer> descList = numbers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         System.out.println("findSecondLargestNumber: " + descList.get(1));
+    }
+
+    public static int findMissingNumberInSequentialNumbersList(List<Integer> integerList){
+        int missingNumber = 0;
+        Collections.sort(integerList);
+        //integerList = integerList.stream().sorted().collect(Collectors.toList());
+
+        List<Integer> draftList = new ArrayList<Integer>();
+        for (int i = 0; i < integerList.size(); i++) {
+            if(i==0){
+                draftList.add(integerList.get(i));
+            } else {
+                if((draftList.get(i-1))+1 != integerList.get(i)){
+                    missingNumber = (draftList.get(i-1)+1);
+                    break;
+                } else {
+                    draftList.add(integerList.get(i));
+                }
+            }
+        }
+        System.out.println("findMissingNumberInSequentialNumbersList:" + missingNumber);
+        return missingNumber;
     }
 }
